@@ -13,11 +13,33 @@ public class TaskService {
     @Autowired
     protected TaskRepository repository;
     @Transactional
-    public void moveTaskToInProgress(Long id){
+    public void updateTask(Long id, String newStatus){
         TaskModel taskModel = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("task not found"));
-        System.out.println(repository.findById(id));
-        taskModel.setStatus("in_progress");
+
+        String currentStatus = taskModel.getStatus();
+        if (!isValidTransional(currentStatus,newStatus)){
+            throw new IllegalArgumentException("Invalid transition from "+currentStatus+" to "+ newStatus);
+        }
+        taskModel.setStatus(newStatus);
         repository.save(taskModel);
+    }
+
+    public boolean isValidTransional(String currentStatus, String newStatus){
+        switch(currentStatus){
+            case "backlog":
+                return newStatus.equals("in_progress");
+            case "in_progress":
+                return newStatus.equals("in_test");
+            case "in_test":
+                return newStatus.equals("code_review");
+            case "code_review":
+                return newStatus.equals("done");
+            case "done":
+                return false;
+            default:
+                return false;
+        }
+
     }
 
 }

@@ -34,7 +34,38 @@ public class TaskController {
 
     @PutMapping("/{id}/move-to-in-progress")
     public ResponseEntity<String> moveTaskProgress(@PathVariable("id") Long id){
-        taskService.moveTaskToInProgress(id);
-        return ResponseEntity.ok("ok");
+        try {
+            taskService.updateTask(id, "in_progress");
+            return ResponseEntity.ok("Task moved to in_progress");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("/{id}/move-to-test")
+    public ResponseEntity<String> moveTaskTest(@PathVariable("id") Long id){
+        try {
+            taskService.updateTask(id, "in_test");
+            return ResponseEntity.ok("Task moved to in_test");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("/{id}/move-to-code-review")
+    public ResponseEntity<String> moveTaskCodeReview(@PathVariable("id") Long id){
+        try {
+            taskService.updateTask(id, "code-review");
+            return ResponseEntity.ok("Task moved to code-review");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("/{id}/move-to-done")
+    public ResponseEntity<String> moveTaskDone(@PathVariable("id") Long id){
+        try {
+            taskService.updateTask(id, "done");
+            return ResponseEntity.ok("Task moved to done");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
