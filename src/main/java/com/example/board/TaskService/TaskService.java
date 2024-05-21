@@ -4,6 +4,7 @@ import com.example.board.TaskEntity.TaskModel;
 import com.example.board.TaskRepository.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +42,18 @@ public class TaskService {
         }
 
     }
+
+    public void updateTitle(Long id ,String newTitle){
+        TaskModel task = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("task not found"));
+        task.setTitle(newTitle);
+        repository.save(task);
+    }
+    public void updateDescription(Long id, String newDescription){
+        TaskModel task = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("task not found"));
+        task.setDescription(newDescription);
+        repository.save(task);
+    }
+
 
     public void deleteTaskService(Long id){
         TaskModel task = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("task not exist"));

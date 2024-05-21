@@ -77,4 +77,23 @@ public class TaskController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PutMapping("/{id}/update-title")
+    public ResponseEntity<String> updateTitle(@PathVariable("id") Long id,@RequestBody String newTitle){
+        try {
+            taskService.updateTitle(id,newTitle);
+            return ResponseEntity.ok("title updated with sucess");
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("/{id}/update-description")
+    public ResponseEntity<String> updateDescription(@PathVariable("id") Long id, @RequestBody String newDescription){
+        try{
+            taskService.updateDescription(id,newDescription);
+            return ResponseEntity.ok("description updated with sucess");
+
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
