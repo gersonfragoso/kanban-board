@@ -42,4 +42,8 @@ public class TaskService {
 
     }
 
+    public void deleteTaskService(Long id){
+        TaskModel task = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("task not exist"));
+        repository.delete(task);
+    }
 }

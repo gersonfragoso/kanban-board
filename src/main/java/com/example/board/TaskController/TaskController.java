@@ -22,7 +22,6 @@ public class TaskController {
     @GetMapping
     public List<TaskDTO> getTask(){
         List<TaskDTO> task = repository.findAll().stream().map(TaskDTO::new).toList();
-
         return task;
     }
 
@@ -65,6 +64,16 @@ public class TaskController {
             taskService.updateTask(id, "done");
             return ResponseEntity.ok("Task moved to done");
         } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable("id") Long id){
+        try {
+            taskService.deleteTaskService(id);
+            return ResponseEntity.ok("Task deleted with sucess");
+        }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
