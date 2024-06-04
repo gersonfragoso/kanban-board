@@ -1,4 +1,4 @@
-package com.example.board.TaskEntity;
+package com.example.board.kanban_tasks.TaskEntity;
 
 public record TaskRequestDTO(String title, String description) {
 }

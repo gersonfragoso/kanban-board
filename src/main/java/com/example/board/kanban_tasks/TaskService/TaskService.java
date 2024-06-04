@@ -1,10 +1,9 @@
-package com.example.board.TaskService;
+package com.example.board.kanban_tasks.TaskService;
 
-import com.example.board.TaskEntity.TaskModel;
-import com.example.board.TaskRepository.TaskRepository;
+import com.example.board.kanban_tasks.TaskEntity.TaskModel;
+import com.example.board.kanban_tasks.TaskRepository.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

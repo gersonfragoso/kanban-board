@@ -1,10 +1,10 @@
-package com.example.board.TaskController;
+package com.example.board.kanban_tasks.TaskController;
 
-import com.example.board.TaskEntity.TaskDTO;
-import com.example.board.TaskEntity.TaskModel;
-import com.example.board.TaskEntity.TaskRequestDTO;
-import com.example.board.TaskRepository.TaskRepository;
-import com.example.board.TaskService.TaskService;
+import com.example.board.kanban_tasks.TaskEntity.TaskDTO;
+import com.example.board.kanban_tasks.TaskEntity.TaskModel;
+import com.example.board.kanban_tasks.TaskEntity.TaskRequestDTO;
+import com.example.board.kanban_tasks.TaskRepository.TaskRepository;
+import com.example.board.kanban_tasks.TaskService.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +38,7 @@ public class TaskController {
             return ResponseEntity.ok("Task moved to in_progress");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+
         }
     }
     @PutMapping("/{id}/move-to-test")
