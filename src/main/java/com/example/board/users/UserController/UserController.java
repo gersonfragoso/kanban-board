@@ -33,6 +33,16 @@ public class UserController {
         repository.save(userModel);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> alterName(@PathVariable("id") Long id, @RequestBody String name){
+        try{
+            userService.alterNameUser(id,name);
+            return ResponseEntity.ok("name alter with sucess");
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         try {
